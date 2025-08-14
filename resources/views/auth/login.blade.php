@@ -1,10 +1,9 @@
 @extends('auth.master')
 @section('content')
-
-       @if (Session::has('msg'))
-           <p class="text-danger">{{ Session::get('msg') }}</p>
-       @endif
-    <form action="{{route('admin.login')}}" method="POST">
+    @if (Session::has('msg'))
+        <p class="text-danger">{{ Session::get('msg') }}</p>
+    @endif
+    <form action="{{ route('admin.login') }}" method="POST">
         @csrf
         <div class="form-group">
             <label for="email">Email Address</label>
@@ -23,10 +22,14 @@
         </div>
 
         <div class="form-options">
+
+
             <div class="remember-me">
-                <input type="checkbox" id="remember" name="remember">
+                <input type="checkbox" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}>
                 <label for="remember">Remember me</label>
             </div>
+
+
             <a href="{{ route('password.request') }}" class="forgot-password">Forgot Password?</a>
         </div>
 
